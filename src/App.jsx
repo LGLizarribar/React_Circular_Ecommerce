@@ -1,18 +1,39 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { RegisterForm } from './components';
+import { checkSession } from './api/auth';
+import { RegisterForm, LoginForm } from './components';
 import './App.scss';
 
-function App() {
+const App = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = async () => {
+    try {
+      const user = await checkSession();
+      if(!user.message) setUser(user);
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
+  
+  const saveUser = user => {
+    setUser(user);
+  };
+
   return (
     <Router>
       <div className="app">
       <Switch>
-        <Route exact path="/register" component={(props) => <RegisterForm {...props} />} />
+        <Route exact path="/register" component={(props) => <RegisterForm saveUser={saveUser} {...props} />} />
+        <Route exact path="/login" component={(props) => <LoginForm saveUser={saveUser} {...props} />} />
       </Switch>
       </div>
     </Router>
   );
-}
+};
 
 export default App;
