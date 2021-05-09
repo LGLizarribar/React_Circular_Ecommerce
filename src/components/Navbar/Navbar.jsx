@@ -8,7 +8,7 @@ const Navbar = (props) => {
     const logoutUser = async () => {
         try {
             await logout();
-            props.saveUser(null);
+            props.deleteUser();
         } catch (error) {
             console.log('error', error);
         }
@@ -33,6 +33,11 @@ const Navbar = (props) => {
                     Login
                 </Link>
             </div>}
+            <div>
+                <Link to="/products">
+                    Products
+                </Link>
+            </div>
             {props.user && <div>
                 <span className="nav__text">
                     Welcome back, {props.user.name}
