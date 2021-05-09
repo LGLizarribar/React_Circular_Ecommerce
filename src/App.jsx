@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { checkSession } from './api/auth';
-import { RegisterForm, LoginForm } from './components';
+import { RegisterForm, LoginForm, Navbar } from './components';
 import './App.scss';
 
 const App = () => {
@@ -27,6 +27,7 @@ const App = () => {
   return (
     <Router>
       <div className="app">
+      <Navbar user={user} saveUser={saveUser} />
       <Switch>
         <Route exact path="/register" component={(props) => <RegisterForm saveUser={saveUser} {...props} />} />
         <Route exact path="/login" component={(props) => <LoginForm saveUser={saveUser} {...props} />} />
