@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { checkSession, login, logout, register } from "../../api/auth";
 
 export const checkSessionAsync = createAsyncThunk(
@@ -33,6 +33,8 @@ export const userSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
       logoutUser: async (state, action) => {
+          const actualState = current(state);
+          console.log('current state :', actualState);
           await logout();
           state.user = null;
           state.hasUser = null;
