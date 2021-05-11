@@ -1,54 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { checkSession } from './api/auth';
+import { useDispatch } from 'react-redux';
+import { checkSessionAsync } from './redux/slices/user.slice';
 import { RegisterForm, LoginForm, Navbar, Home, Products, SecureRoute } from './components';
 import './App.scss';
 
 const App = () => {
-  const [user, setUser] = useState(null);
-  const [hasUser, setHasUser] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if(user) {
-      console.log('Confirmamos que tenemos usuario');
-    } else {
-      getUser();
-    }
-  }, [user]);
+    getUser();
+  }, []);
 
   const getUser = async () => {
-    try {
-      const user = await checkSession();
-      if(!user.message) {
-        setUser(user);
-        setHasUser(true);
-      } else {
-        setHasUser(false);
-      }
-    } catch (error) {
-      console.log('error', error);
-      setHasUser(false);
-    }
-  }
-  
-  const saveUser = user => {
-    setUser(user);
-    setHasUser(true);
+      dispatch(checkSessionAsync());
   };
-
-  const deleteUser = () => {
-    setUser(null);
-    setHasUser(false);
-  }
 
   return (
     <Router>
       <div className="app">
-      <Navbar user={user} deleteUser={deleteUser} />
+      <Navbar />
       <Switch>
-        <Route exact path="/register" component={(props) => <RegisterForm saveUser={saveUser} {...props} />} />
-        <Route exact path="/login" component={(props) => <LoginForm saveUser={saveUser} {...props} />} />
-        <SecureRoute exact path="/products" hasUser={hasUser} component={Products} />
+        <Route exact path="/register" component={(props) => <RegisterForm {...props} />} />
+        <Route exact path="/login" component={(props) => <LoginForm {...props} />} />
+        <SecureRoute exact path="/products" component={Products} />
         <Route exact path="/" component={(props) => <Home {...props} />} />
       </Switch>
       </div>

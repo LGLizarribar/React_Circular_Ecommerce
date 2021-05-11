@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { register } from '../../api/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerAsync } from '../../redux/slices/user.slice';
 import './RegisterForm.scss';
 
 const INITIAL_STATE = {
@@ -8,25 +9,18 @@ const INITIAL_STATE = {
     email: '',
     password: '',
     city: '',
-    photo: '',
+    userImg: '',
 };
 
 const RegisterForm = (props) => {
     const [formFields, setFormFields] = useState(INITIAL_STATE);
-    const [error, setError] = useState(null);
+    const {error} = useSelector(state => state.user);
+    const dispatch = useDispatch();
 
     const handleFormSubmit = async (ev) => {
         ev.preventDefault();
-
-        try {
-            const user = await register(formFields);
-            props.saveUser(user);
-
-            setError(null);
-            setFormFields(INITIAL_STATE);
-        } catch (error) {
-            setError(error.message);
-        }
+        dispatch(registerAsync(formFields));
+        setFormFields(INITIAL_STATE);
     };
 
     const handleInputChange = (ev) => {
@@ -95,6 +89,7 @@ const RegisterForm = (props) => {
                         name="city"
                         onChange={handleInputChange}
                         value={formFields.city}>
+                        <option value="">-</option>
                         <option value="Madrid">Madrid</option>
                         <option value="Barcelona">Barcelona</option>
                         <option value="Granada">Granada</option>
@@ -105,7 +100,7 @@ const RegisterForm = (props) => {
 
                 <label htmlFor="userImg">
                     <p>Photo</p>
-                    <input type="file" id="userImg" name="userImg" onChange={handleInputChange} />
+                    <input type="file" id="userImg" name="userImg" onChange={handleInputChange} value={formFields.userImg}/>
                 </label>
 
 

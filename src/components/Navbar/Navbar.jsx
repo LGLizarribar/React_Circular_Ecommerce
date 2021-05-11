@@ -1,20 +1,11 @@
 import { Link, withRouter } from 'react-router-dom';
-import { logout } from '../../api/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../redux/slices/user.slice';
 import './Navbar.scss';
 
 const Navbar = (props) => {
-    // const history = useHistory();
-
-    const logoutUser = async () => {
-        try {
-            await logout();
-            props.deleteUser();
-        } catch (error) {
-            console.log('error', error);
-        }
-    };
-    
-    // console.log(props);
+    const dispatch = useDispatch();
+    const {user} = useSelector(state => state.user);
 
     return (
         <nav className="nav">
@@ -23,12 +14,12 @@ const Navbar = (props) => {
                     Circular
                 </Link>
             </div>
-            {!props.user && <div>
+            {!user && <div>
                 <Link to="/register">
                     Register
                 </Link>
             </div>}
-            {!props.user && <div>
+            {!user && <div>
                 <Link to="/login">
                     Login
                 </Link>
@@ -38,11 +29,11 @@ const Navbar = (props) => {
                     Products
                 </Link>
             </div>
-            {props.user && <div>
+            {user && <div>
                 <span className="nav__text">
-                    Welcome back, {props.user.name}
+                    Welcome back, {user.name}
                 </span>
-                <button onClick={logoutUser}>Logout</button>
+                <button onClick={() => dispatch(logoutUser())}>Logout</button>
             </div>}
         </nav>
     )

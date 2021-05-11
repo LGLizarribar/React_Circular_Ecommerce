@@ -1,19 +1,20 @@
 import { Route, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const SecureRoute = (props) => {
-    const { hasUser, ...restProps } = props;
+    const { hasUser } = useSelector(state => state.user );
 
-    if (props.hasUser === null) {
+    if (hasUser === null) {
         return <div>Loading...</div>;
     }
 
-    if (props.hasUser) {
+    if (hasUser) {
         return (
-            <Route {...restProps} />
+            <Route {...props} />
         );
     }
 
-    if (!props.hasUser) {
+    if (hasUser) {
         return (
             <Redirect to='/login' />
         );

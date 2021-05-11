@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { login } from '../../api/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAsync } from '../../redux/slices/user.slice';
 import './LoginForm.scss';
 
 const INITIAL_STATE = {
@@ -9,25 +10,16 @@ const INITIAL_STATE = {
 
 const LoginForm = (props) => {
     const [formData, setFormData] = useState(INITIAL_STATE);
-    const [error, setError] = useState(null);
+    const {error} = useSelector(state => state.user);
+    const dispatch = useDispatch();
 
     const handleFormSubmit = async ev => {
         ev.preventDefault();
-
-        const user = await login(formData);
-
-        if (user.message) {
-            setError(user.message);
-        } else {
-            props.saveUser(user);
-            setFormData(INITIAL_STATE);
-            setError(null);
-        }
+        await dispatch(loginAsync(formData));
     };
 
     const handleInputChange = ev => {
         const { name, value } = ev.target;
-
         setFormData({ ...formData, [name]: value });
     }
 
