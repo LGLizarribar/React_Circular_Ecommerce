@@ -15,13 +15,33 @@ const INITIAL_STATE = {
 const RegisterForm = (props) => {
     const [formFields, setFormFields] = useState(INITIAL_STATE);
     const {error} = useSelector(state => state.user);
+    const [photo, setPhoto] = useState(null);
+    const [photoPreview, setPhotoPreview] = useState(null);
     const dispatch = useDispatch();
 
     const handleFormSubmit = async (ev) => {
         ev.preventDefault();
-        dispatch(registerAsync(formFields));
+        const form = new FormData();
+        form.append('name', formFields.name);
+        form.append('surname', formFields.surname);
+        form.append('email', formFields.email);
+        form.append('password', formFields.password);
+        form.append('city', formFields.city);
+        form.append('userImg', photo);
+
+        dispatch(registerAsync(form));
         setFormFields(INITIAL_STATE);
     };
+
+    const handleImg = (ev) => {
+        let reader = new FileReader();
+        let file = ev.target.files[0];
+        reader.onloadend = () => {
+            setPhoto(file);
+            setPhotoPreview(reader.result);
+        }
+        reader.readAsDataURL(file);
+    }
 
     const handleInputChange = (ev) => {
         const { name, value } = ev.target;
@@ -34,7 +54,10 @@ const RegisterForm = (props) => {
     return (
         <div className="form-container">
             <h3>Register</h3>
-            <form onSubmit={handleFormSubmit}>
+            <form
+                onSubmit={handleFormSubmit}
+                method='POST'
+                encType='multipart/form-data'>
                 <label htmlFor="name">
                     <p>Name</p>
                     <input
@@ -100,7 +123,13 @@ const RegisterForm = (props) => {
 
                 <label htmlFor="userImg">
                     <p>Photo</p>
-                    <input type="file" id="userImg" name="userImg" onChange={handleInputChange} value={formFields.userImg}/>
+                    <input
+                        type="file"
+                        id="userImg"
+                        name="userImg"
+                        onChange={handleImg}
+                        value={formFields.userImg}
+                    />
                 </label>
 
 
