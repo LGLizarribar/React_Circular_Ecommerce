@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAsync } from '../../redux/slices/user.slice';
+import { useHistory } from 'react-router-dom';
 import './LoginForm.scss';
 
 const INITIAL_STATE = {
@@ -12,10 +13,12 @@ const LoginForm = (props) => {
     const [formData, setFormData] = useState(INITIAL_STATE);
     const {error} = useSelector(state => state.user);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleFormSubmit = async ev => {
         ev.preventDefault();
         await dispatch(loginAsync(formData));
+        history.push('/');
     };
 
     const handleInputChange = ev => {

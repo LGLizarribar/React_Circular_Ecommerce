@@ -1,4 +1,4 @@
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/slices/user.slice';
 import './Navbar.scss';
@@ -6,6 +6,12 @@ import './Navbar.scss';
 const Navbar = (props) => {
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.user);
+    const history = useHistory();
+
+    const handleLogout = () => {
+        dispatch(logoutUser());
+        history.push('/');
+    }
 
     return (
         <nav className="nav">
@@ -33,7 +39,7 @@ const Navbar = (props) => {
                 <span className="nav__text">
                     Welcome back, {user.name}
                 </span>
-                <button onClick={() => dispatch(logoutUser())}>Logout</button>
+                <button onClick={handleLogout}>Logout</button>
             </div>}
         </nav>
     )

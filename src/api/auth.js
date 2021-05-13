@@ -4,7 +4,6 @@ const checkSessionUrl = "http://localhost:5000/auth/check-session";
 const logoutUrl = "http://localhost:5000/auth/logout";
 
 export const register = async (userData) => {
-    debugger;
     const request = await fetch(registerUrl, {
         method: 'POST',
         headers: {

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerAsync } from '../../redux/slices/user.slice';
+import { useHistory } from 'react-router-dom';
 import './RegisterForm.scss';
 
 const INITIAL_STATE = {
@@ -18,6 +19,7 @@ const RegisterForm = (props) => {
     const [photo, setPhoto] = useState(null);
     const [photoPreview, setPhotoPreview] = useState(null);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleFormSubmit = async (ev) => {
         ev.preventDefault();
@@ -31,6 +33,7 @@ const RegisterForm = (props) => {
 
         dispatch(registerAsync(form));
         setFormFields(INITIAL_STATE);
+        history.push('/');
     };
 
     const handleImg = (ev) => {
@@ -131,6 +134,9 @@ const RegisterForm = (props) => {
                         value={formFields.userImg}
                     />
                 </label>
+                {photoPreview && <div className="form-container__error">
+                {photoPreview}
+                </div>}
 
 
                 <div className="form-container__button">
