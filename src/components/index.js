@@ -4,6 +4,8 @@ import Navbar from './Navbar/Navbar';
 import Home from './Home/Home';
 import Products from './Products/Products';
 import SecureRoute from './SecureRoute/SecureRoute';
+import Product from './Product/Product';
+import AddProduct from './AddProduct/AddProduct';
 
 export {
     RegisterForm,
@@ -12,4 +14,6 @@ export {
     Home,
     Products,
     SecureRoute,
+    Product,
+    AddProduct,
 }
