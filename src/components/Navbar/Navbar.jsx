@@ -35,11 +35,11 @@ const Navbar = (props) => {
                     Login
                     </Link>
                 </li>}
-                <li>
+                {user && <li>
                     <Link to="/products">
                         Products
                     </Link>
-                </li>
+                </li>}
                 {user && <li>
                     <Link to="/products/add-product">
                         Add your products!
