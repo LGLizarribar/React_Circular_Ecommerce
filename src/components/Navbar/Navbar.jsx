@@ -15,32 +15,36 @@ const Navbar = (props) => {
 
     return (
         <nav className="nav">
-            <div>
+            <div className="nav__title">
                 <Link to="/">
                     Circular
                 </Link>
             </div>
-            {!user && <div>
-                <Link to="/register">
-                    Register
-                </Link>
-            </div>}
-            {!user && <div>
-                <Link to="/login">
-                    Login
-                </Link>
-            </div>}
-            <div>
-                <Link to="/products">
-                    Products
-                </Link>
+            <div className="nav__links">
+                <ul>
+                    {!user && <li>
+                        <Link to="/register">
+                            Register
+                        </Link>
+                    </li>}
+                    {!user && <li>
+                        <Link to="/login">
+                            Login
+                        </Link>
+                    </li>}
+                    <li>
+                        <Link to="/products">
+                            Products
+                        </Link>
+                    </li>
+                    {user && <li>
+                        <span className="nav__text">
+                            Welcome back, {user.name}
+                        </span>
+                        <button onClick={handleLogout}>Logout</button>
+                    </li>}
+                </ul>
             </div>
-            {user && <div>
-                <span className="nav__text">
-                    Welcome back, {user.name}
-                </span>
-                <button onClick={handleLogout}>Logout</button>
-            </div>}
         </nav>
     )
 }

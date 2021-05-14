@@ -1,0 +1,35 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background-color: #df6f25;
+    color: white;
+
+    ul, li {
+        padding: 0;
+        margin: 0;
+    }
+
+    ul {
+        display: flex;
+        list-style-type: none;
+    }
+
+    li {
+        margin-right: 16px;
+    }
+
+    button {
+        background-color: #df6f25;
+        color: white;
+        margin-left: 5px;
+        border: none;
+        font-size: medium;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+}
