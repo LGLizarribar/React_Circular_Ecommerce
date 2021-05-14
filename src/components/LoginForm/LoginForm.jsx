@@ -27,12 +27,12 @@ const LoginForm = (props) => {
     }
 
     return (
-        <div className="form-container">
-            <h3 className="form-container__title">Login</h3>
+        <div className="login-form-container">
+            <h3 className="login-form-container__title">Login</h3>
 
-            <form class="form-container__form" onSubmit={handleFormSubmit}>
-                <label class="form-container__field" htmlFor="email">
-                    <p className="form-container__text">Email</p>
+            <form class="login-form-container__form" onSubmit={handleFormSubmit}>
+                <label class="login-form-container__field" htmlFor="email">
+                    <p className="login-form-container__text">Email</p>
                     <input
                         type="email"
                         name="email"
@@ -43,8 +43,8 @@ const LoginForm = (props) => {
                     />
                 </label>
 
-                <label class="form-container__field" htmlFor="password">
-                    <p className="form-container__text">Password</p>
+                <label class="login-form-container__field" htmlFor="password">
+                    <p className="login-form-container__text">Password</p>
                     <input
                         type="password"
                         name="password"
@@ -56,11 +56,11 @@ const LoginForm = (props) => {
                 </label>
 
                 <div>
-                    <button className="form-container__button" type="submit">Access</button>
+                    <button className="login-form-container__button" type="submit">Access</button>
                 </div>
             </form>
 
-            {error && <div className="form-container__error">
+            {error && <div className="login-form-container__error">
                 {error}
             </div>}
         </div>
