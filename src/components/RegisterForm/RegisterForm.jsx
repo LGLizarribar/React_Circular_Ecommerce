@@ -58,11 +58,11 @@ const RegisterForm = (props) => {
         <div className="register-form-container">
             <h3 className="register-form-container__title">Register</h3>
             <form
-                class="register-form-container__field"
+                className="register-form-container__field"
                 onSubmit={handleFormSubmit}
                 method='POST'
                 encType='multipart/form-data'>
-                <label class="register-form-container__field" htmlFor="name">
+                <label className="register-form-container__field" htmlFor="name">
                     <p className="register-form-container__text">Name</p>
                     <input
                         type="text"
@@ -74,7 +74,7 @@ const RegisterForm = (props) => {
                     />
                 </label>
 
-                <label class="register-form-container__field" htmlFor="surname">
+                <label className="register-form-container__field" htmlFor="surname">
                     <p className="register-form-container__text">Surname</p>
                     <input
                         type="text"
@@ -86,7 +86,7 @@ const RegisterForm = (props) => {
                     />
                 </label>
 
-                <label class="register-form-container__field" htmlFor="email">
+                <label className="register-form-container__field" htmlFor="email">
                     <p className="register-form-container__text">Email</p>
                     <input
                         type="email"
@@ -98,7 +98,7 @@ const RegisterForm = (props) => {
                     />
                 </label>
 
-                <label class="register-form-container__field" htmlFor="password">
+                <label className="register-form-container__field" htmlFor="password">
                     <p className="register-form-container__text">Password</p>
                     <input
                         type="password"
@@ -110,7 +110,7 @@ const RegisterForm = (props) => {
                     />
                 </label>
 
-                <label class="register-form-container__field" htmlFor="city">
+                <label className="register-form-container__field" htmlFor="city">
                     <p className="register-form-container__text">City</p>
                     <select id="city"
                         name="city"
@@ -125,7 +125,7 @@ const RegisterForm = (props) => {
                     </select>
                 </label>
 
-                <label class="register-form-container__field" htmlFor="userImg">
+                <label className="register-form-container__field" htmlFor="userImg">
                     <p className="register-form-container__text">Photo</p>
                     <input
                         type="file"

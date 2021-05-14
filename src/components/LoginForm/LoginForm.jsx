@@ -30,8 +30,8 @@ const LoginForm = (props) => {
         <div className="login-form-container">
             <h3 className="login-form-container__title">Login</h3>
 
-            <form class="login-form-container__form" onSubmit={handleFormSubmit}>
-                <label class="login-form-container__field" htmlFor="email">
+            <form className="login-form-container__form" onSubmit={handleFormSubmit}>
+                <label className="login-form-container__field" htmlFor="email">
                     <p className="login-form-container__text">Email</p>
                     <input
                         type="email"
@@ -43,7 +43,7 @@ const LoginForm = (props) => {
                     />
                 </label>
 
-                <label class="login-form-container__field" htmlFor="password">
+                <label className="login-form-container__field" htmlFor="password">
                     <p className="login-form-container__text">Password</p>
                     <input
                         type="password"

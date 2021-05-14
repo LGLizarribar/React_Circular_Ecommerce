@@ -39,13 +39,13 @@ const AddProduct = (props) => {
     };
 
     return (
-        <div class="product-form-container">
+        <div className="product-form-container">
             <form
-                class="product-form-container__form"
+                className="product-form-container__form"
                 onSubmit={submitProduct}
                 method="POST"
                 enctype="multipart/form-data">
-                <label class="product-form-container__field" htmlFor="name">
+                <label className="product-form-container__field" htmlFor="name">
                     <p className="product-form-container__text">Name</p>
                     <input
                         type="text"
@@ -56,7 +56,7 @@ const AddProduct = (props) => {
                         value={form.name}
                     />
                 </label>
-                <label class="product-form-container__field" htmlFor="description">
+                <label className="product-form-container__field" htmlFor="description">
                     <p className="product-form-container__text">Description</p>
                     <textarea
                         id="description"
@@ -67,7 +67,7 @@ const AddProduct = (props) => {
                         value={form.description}
                     />
                 </label>
-                <label class="product-form-container__field" htmlFor="category">
+                <label className="product-form-container__field" htmlFor="category">
                     <p className="product-form-container__text">Categoy</p>
                     <select 
                         id="category"
@@ -82,7 +82,7 @@ const AddProduct = (props) => {
                         <option value="Other">Other</option>
                     </select>
                 </label>
-                <label class="product-form-container__field" htmlFor="price">
+                <label className="product-form-container__field" htmlFor="price">
                     <p className="product-form-container__text">Price</p>
                     <input
                         type="float"
@@ -93,7 +93,7 @@ const AddProduct = (props) => {
                         value={form.price}
                     />
                 </label>
-                <label class="product-form-container__field" htmlFor="productImage">
+                <label className="product-form-container__field" htmlFor="productImage">
                     <p className="product-form-container__text">Photo</p>
                     <input
                         type="file"
@@ -102,7 +102,7 @@ const AddProduct = (props) => {
                         onChange={inputChange}
                     />
                 </label>
-                <button class="product-form-container__button" type="submit">Sell</button>
+                <button className="product-form-container__button" type="submit">Sell</button>
             </form>
         </div>
     )
