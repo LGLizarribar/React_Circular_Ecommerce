@@ -61,7 +61,7 @@ const AddProduct = (props) => {
                     <textarea
                         id="description"
                         name="description"
-                        rows='4' 
+                        rows='4'
                         cols='50'
                         onChange={inputChange}
                         value={form.description}
@@ -69,7 +69,7 @@ const AddProduct = (props) => {
                 </label>
                 <label className="product-form-container__field" htmlFor="category">
                     <p className="product-form-container__text">Categoy</p>
-                    <select 
+                    <select
                         id="category"
                         name="category"
                         onChange={inputChange}
