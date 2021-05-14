@@ -3,4 +3,13 @@
     &__title, &__content {
         color: #df6f25c0;
     }
+
+    &__images {
+        margin-top: 100px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-end;
+        flex-wrap: wrap;
+    }
 }
