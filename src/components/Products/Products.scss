@@ -1,0 +1,26 @@
+.products{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+    &__card {
+        width: 350px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+
+    &__image {
+        max-width: 200px;
+        margin-bottom: 10px;
+    }
+
+    &__link {
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        color: #df6f25c0;
+    }
+}

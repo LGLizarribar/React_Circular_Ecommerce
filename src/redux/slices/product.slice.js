@@ -5,7 +5,7 @@ const INITIAL_STATE = {
     all: [],
 };
 
-export const getAllProductsAsync = createAsyncThunk('products', async () => {
+export const getAllProductsAsync = createAsyncThunk('products/getAll', async () => {
     return await getAllProducts();
 })
 
