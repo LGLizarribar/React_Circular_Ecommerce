@@ -44,7 +44,7 @@ const AddProduct = (props) => {
                 className="product-form-container__form"
                 onSubmit={submitProduct}
                 method="POST"
-                enctype="multipart/form-data">
+                encType="multipart/form-data">
                 <label className="product-form-container__field" htmlFor="name">
                     <p className="product-form-container__text">Name</p>
                     <input
