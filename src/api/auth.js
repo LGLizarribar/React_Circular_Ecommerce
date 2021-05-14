@@ -8,11 +8,10 @@ export const register = async (userData) => {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
         },
         credentials: 'include',
-        body: JSON.stringify(userData)
+        body: userData
     });
 
     const response = await request.json();

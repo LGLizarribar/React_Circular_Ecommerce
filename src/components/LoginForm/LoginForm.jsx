@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAsync } from '../../redux/slices/user.slice';
+import { useHistory } from 'react-router-dom';
 import './LoginForm.scss';
 
 const INITIAL_STATE = {
@@ -12,10 +13,12 @@ const LoginForm = (props) => {
     const [formData, setFormData] = useState(INITIAL_STATE);
     const {error} = useSelector(state => state.user);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleFormSubmit = async ev => {
         ev.preventDefault();
         await dispatch(loginAsync(formData));
+        history.push('/');
     };
 
     const handleInputChange = ev => {
@@ -24,12 +27,12 @@ const LoginForm = (props) => {
     }
 
     return (
-        <div className="form-container">
-            <h3>Login</h3>
+        <div className="login-form-container">
+            <h3 className="login-form-container__title">Login</h3>
 
-            <form onSubmit={handleFormSubmit}>
-                <label htmlFor="email">
-                    <p>Email</p>
+            <form className="login-form-container__form" onSubmit={handleFormSubmit}>
+                <label className="login-form-container__field" htmlFor="email">
+                    <p className="login-form-container__text">Email</p>
                     <input
                         type="email"
                         name="email"
@@ -40,8 +43,8 @@ const LoginForm = (props) => {
                     />
                 </label>
 
-                <label htmlFor="password">
-                    <p>Password</p>
+                <label className="login-form-container__field" htmlFor="password">
+                    <p className="login-form-container__text">Password</p>
                     <input
                         type="password"
                         name="password"
@@ -52,12 +55,12 @@ const LoginForm = (props) => {
                     />
                 </label>
 
-                <div className="form-container__button">
-                    <button type="submit">Access</button>
+                <div>
+                    <button className="login-form-container__button" type="submit">Access</button>
                 </div>
             </form>
 
-            {error && <div className="form-container__error">
+            {error && <div className="login-form-container__error">
                 {error}
             </div>}
         </div>

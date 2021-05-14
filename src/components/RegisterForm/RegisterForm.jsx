@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerAsync } from '../../redux/slices/user.slice';
+import { useHistory } from 'react-router-dom';
 import './RegisterForm.scss';
 
 const INITIAL_STATE = {
@@ -15,13 +16,35 @@ const INITIAL_STATE = {
 const RegisterForm = (props) => {
     const [formFields, setFormFields] = useState(INITIAL_STATE);
     const {error} = useSelector(state => state.user);
+    const [photo, setPhoto] = useState(null);
+    const [photoPreview, setPhotoPreview] = useState(null);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleFormSubmit = async (ev) => {
         ev.preventDefault();
-        dispatch(registerAsync(formFields));
+        const form = new FormData();
+        form.append('name', formFields.name);
+        form.append('surname', formFields.surname);
+        form.append('email', formFields.email);
+        form.append('password', formFields.password);
+        form.append('city', formFields.city);
+        form.append('userImg', photo);
+
+        dispatch(registerAsync(form));
         setFormFields(INITIAL_STATE);
+        history.push('/');
     };
+
+    const handleImg = (ev) => {
+        let reader = new FileReader();
+        let file = ev.target.files[0];
+        reader.onloadend = () => {
+            setPhoto(file);
+            setPhotoPreview(reader.result);
+        }
+        reader.readAsDataURL(file);
+    }
 
     const handleInputChange = (ev) => {
         const { name, value } = ev.target;
@@ -32,11 +55,15 @@ const RegisterForm = (props) => {
     };
 
     return (
-        <div className="form-container">
-            <h3>Register</h3>
-            <form onSubmit={handleFormSubmit}>
-                <label htmlFor="name">
-                    <p>Name</p>
+        <div className="register-form-container">
+            <h3 className="register-form-container__title">Register</h3>
+            <form
+                className="register-form-container__field"
+                onSubmit={handleFormSubmit}
+                method='POST'
+                encType='multipart/form-data'>
+                <label className="register-form-container__field" htmlFor="name">
+                    <p className="register-form-container__text">Name</p>
                     <input
                         type="text"
                         name="name"
@@ -47,8 +74,8 @@ const RegisterForm = (props) => {
                     />
                 </label>
 
-                <label htmlFor="surname">
-                    <p>Surname</p>
+                <label className="register-form-container__field" htmlFor="surname">
+                    <p className="register-form-container__text">Surname</p>
                     <input
                         type="text"
                         name="surname"
@@ -59,8 +86,8 @@ const RegisterForm = (props) => {
                     />
                 </label>
 
-                <label htmlFor="email">
-                    <p>Email</p>
+                <label className="register-form-container__field" htmlFor="email">
+                    <p className="register-form-container__text">Email</p>
                     <input
                         type="email"
                         name="email"
@@ -71,8 +98,8 @@ const RegisterForm = (props) => {
                     />
                 </label>
 
-                <label htmlFor="password">
-                    <p>Contraseña</p>
+                <label className="register-form-container__field" htmlFor="password">
+                    <p className="register-form-container__text">Password</p>
                     <input
                         type="password"
                         name="password"
@@ -83,8 +110,8 @@ const RegisterForm = (props) => {
                     />
                 </label>
 
-                <label htmlFor="city">
-                    <p>City</p>
+                <label className="register-form-container__field" htmlFor="city">
+                    <p className="register-form-container__text">City</p>
                     <select id="city"
                         name="city"
                         onChange={handleInputChange}
@@ -98,18 +125,27 @@ const RegisterForm = (props) => {
                     </select>
                 </label>
 
-                <label htmlFor="userImg">
-                    <p>Photo</p>
-                    <input type="file" id="userImg" name="userImg" onChange={handleInputChange} value={formFields.userImg}/>
+                <label className="register-form-container__field" htmlFor="userImg">
+                    <p className="register-form-container__text">Photo</p>
+                    <input
+                        type="file"
+                        id="userImg"
+                        name="userImg"
+                        onChange={handleImg}
+                        value={formFields.userImg}
+                    />
                 </label>
+                {photoPreview && <div className="register-form-container__error">
+                {photoPreview}
+                </div>}
 
 
-                <div className="form-container__button">
-                    <button type="submit">Send</button>
+                <div>
+                    <button className="register-form-container__button" type="submit">Send</button>
                 </div>
             </form>
 
-            {error && <div className="form-container__error">
+            {error && <div className="register-form-container__error">
                 {error}
             </div>}
         </div>

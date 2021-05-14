@@ -1,24 +1,25 @@
-.register-form-container{
+.product-form-container{
     background:rgba(#df6f25,.7);
     padding: 40px;
-    max-width: 400px;
+    max-width: 600px;
     margin: 40px auto;
     border-radius: 4px;
     box-shadow:0 4px 10px 4px rgba(#df6f25,.3);
 
     &__title, &__text {
         color: white;
+        text-align: left;
     }
 
     &__form{
         display: flex;
         flex-direction: column;
-        align-content: center;
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     &__field{
         margin-bottom: 20px;
+        align-self: flex-start;
     }
 
     &__button{

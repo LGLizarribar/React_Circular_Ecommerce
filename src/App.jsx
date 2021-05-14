@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { checkSessionAsync } from './redux/slices/user.slice';
-import { RegisterForm, LoginForm, Navbar, Home, Products, SecureRoute } from './components';
+import { RegisterForm, LoginForm, Navbar, Home, Products, SecureRoute, AddProduct } from './components';
 import './App.scss';
 
 const App = () => {
@@ -24,6 +24,7 @@ const App = () => {
         <Route exact path="/register" component={(props) => <RegisterForm {...props} />} />
         <Route exact path="/login" component={(props) => <LoginForm {...props} />} />
         <SecureRoute exact path="/products" component={Products} />
+        <SecureRoute exact path="/products/add-product" component={AddProduct} />
         <Route exact path="/" component={(props) => <Home {...props} />} />
       </Switch>
       </div>
