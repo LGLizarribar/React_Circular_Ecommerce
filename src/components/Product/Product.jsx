@@ -9,7 +9,7 @@ const Product = (props) => {
             {products.map(p => <div key={p._id}>
             <div className='products__card'>
                 {p.productImage && <img src={p.productImage} className='products__image' alt="{p.name}"/>}
-                <Link className='products__link' to="product/{p._id}">{p.name}</Link>
+                <Link className='products__link' to={`product/${p._id}`}>{p.name}</Link>
                 <p className='products__text'>Category: {p.category}</p>
                 <p className='products__text'>{p.description}</p>
                 <p className='products__text'>Price: {p.price}.-€</p>
