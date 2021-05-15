@@ -135,8 +135,8 @@ const RegisterForm = (props) => {
                         value={formFields.userImg}
                     />
                 </label>
-                {photoPreview && <div className="register-form-container__error">
-                {photoPreview}
+                {photoPreview && <div>
+                <img className="register-form-container__image" src={photoPreview} alt='preview' />
                 </div>}
 
 
